@@ -14,8 +14,8 @@ while True:
 
     detect = cascade.detectMultiScale(frameGray, 1.2, 5)
     for (x, y, w, h) in detect:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
-
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 0), 2)
+        
     cv2.imshow("Camera", frame)
     k = cv2.waitKey(60)
     if k == 27:
