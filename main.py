@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from colorProcessing import colorRecognition
+from colorProcessing import colorRecognition, mediaSatisfacao
 
 camera = cv2.VideoCapture(0)
 cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
@@ -23,4 +23,5 @@ while True:
 cv2.destroyAllWindows()
 camera.release()
 
+mediaSatisfacao()
 
