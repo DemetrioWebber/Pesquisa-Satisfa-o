@@ -3,20 +3,19 @@ import numpy as np
 from colorProcessing import colorRecognition, mediaSatisfacao
 
 camera = cv2.VideoCapture(0)
-cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+view_cascade = cv2.CascadeClassifier("treinamento/cascade.xml")
 
 while True:
-    _, frame = camera.read()
-    frame = cv2.flip(frame, 1)
-    frameGray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    _,img = camera.read()
+    height, width, c = img.shape
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    rosto = view_cascade.detectMultiScale(gray, 1.50, 5)
+    for (x,y,w,h) in rosto:
+        cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)
 
-    colorRecognition(frame)
-
-    detect = cascade.detectMultiScale(frameGray, 1.2, 5)
-    for (x, y, w, h) in detect:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 0), 2)
+    colorRecognition(img)
         
-    cv2.imshow("Camera", frame)
+    cv2.imshow("Camera", img)
     k = cv2.waitKey(60)
     if k == 27:
         break
