@@ -12,8 +12,9 @@ while True:
     rosto = view_cascade.detectMultiScale(gray, 1.50, 5)
     for (x,y,w,h) in rosto:
         cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)
-
-    colorRecognition(img)
+    for r in rosto:
+        if len(r) == 4:
+            colorRecognition(img)
         
     cv2.imshow("Camera", img)
     k = cv2.waitKey(60)
